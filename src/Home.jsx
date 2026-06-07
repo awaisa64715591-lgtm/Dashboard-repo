@@ -1,159 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Dashboard Home</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+function Home() {
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f6f9;
-      transition: 0.3s;
-    }
+  function goDashboard() {
+    window.location.href = "/dashboard";
+  }
 
-    /* NAVBAR */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #111827;
-      padding: 15px 30px;
-      color: white;
-    }
+  function toggleTheme() {
+    document.body.classList.toggle("dark");
+  }
 
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin: 0 10px;
-    }
+  return (
+    <div className="min-h-screen bg-gray-100">
 
-    nav a:hover {
-      color: #00bcd4;
-    }
+      {/* NAVBAR */}
+      <nav className="flex justify-between bg-gray-900 text-white p-4">
+        <h1>DASHBOARD</h1>
+        <div>
+          <a className="mx-2" href="/">Home</a>
+          <a className="mx-2" href="/signup">Signup</a>
+          <a className="mx-2" href="/login">Login</a>
+          <a className="mx-2" href="/dashboard">Dashboard</a>
+        </div>
+      </nav>
 
-    /* HERO SECTION */
-    .hero {
-      text-align: center;
-      padding: 80px 20px;
-      background: linear-gradient(135deg, #00bcd4, #3f51b5);
-      color: white;
-    }
+      {/* HERO */}
+      <div className="text-center py-20 bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
+        <h1 className="text-4xl font-bold">Welcome to Your Dashboard</h1>
+        <p className="mt-2">Manage your account easily</p>
 
-    .hero h1 {
-      font-size: 40px;
-      margin-bottom: 10px;
-    }
+        <button
+          onClick={goDashboard}
+          className="mt-5 bg-black px-4 py-2 rounded"
+        >
+          Go to Dashboard
+        </button>
+      </div>
 
-    .hero p {
-      font-size: 18px;
-      opacity: 0.9;
-    }
+      {/* BUTTON */}
+      <div className="text-center my-5">
+        <button
+          onClick={toggleTheme}
+          className="bg-gray-900 text-white px-4 py-2 rounded"
+        >
+          Dark Mode
+        </button>
+      </div>
 
-    .hero button {
-      margin-top: 20px;
-      padding: 12px 25px;
-      border: none;
-      background: #111827;
-      color: white;
-      cursor: pointer;
-      border-radius: 5px;
-    }
+      {/* CARDS */}
+      <div className="flex flex-wrap justify-center gap-5 p-5">
+        <div className="bg-white p-5 shadow rounded w-48 text-center">👤 Profile</div>
+        <div className="bg-white p-5 shadow rounded w-48 text-center">📊 Analytics</div>
+        <div className="bg-white p-5 shadow rounded w-48 text-center">⚙️ Settings</div>
+        <div className="bg-white p-5 shadow rounded w-48 text-center">🔒 Security</div>
+      </div>
 
-    /* CARDS */
-    .cards {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin: 40px;
-      gap: 20px;
-    }
-
-    .card {
-      background: white;
-      padding: 20px;
-      width: 200px;
-      text-align: center;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      transition: 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-    }
-
-    /* BUTTON */
-    .top-btn {
-      text-align: center;
-      margin: 20px;
-    }
-
-    .top-btn button {
-      padding: 10px 15px;
-      border: none;
-      background: #111827;
-      color: white;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-
-    /* DARK MODE */
-    .dark {
-      background: #0f172a;
-      color: white;
-    }
-
-    .dark .card {
-      background: #1e293b;
-      color: white;
-    }
-  </style>
-</head>
-
-<body>
-
-  <!-- NAVBAR -->
-  <nav>
-    <div><b>DASHBOARD</b></div>
-    <div>
-      <a href="index.html">Home</a>
-      <a href="signup.html">Signup</a>
-      <a href="login.html">Login</a>
-      <a href="dashboard.html">Dashboard</a>
     </div>
-  </nav>
+  );
+}
 
-  <!-- HERO -->
-  <section class="hero">
-    <h1>Welcome to Your Dashboard</h1>
-    <p>Manage your account, profile and settings easily</p>
-    <button onclick="goDashboard()">Go to Dashboard</button>
-  </section>
-
-  <!-- BUTTONS -->
-  <div class="top-btn">
-    <button onclick="toggleTheme()">Dark Mode</button>
-  </div>
-
-  <!-- CARDS -->
-  <section class="cards">
-    <div class="card">👤 User Profile</div>
-    <div class="card">📊 Analytics</div>
-    <div class="card">⚙️ Settings</div>
-    <div class="card">🔒 Security</div>
-  </section>
-
-  <script>
-    function goDashboard() {
-      window.location.href = "dashboard.html";
-    }
-
-    function toggleTheme() {
-      document.body.classList.toggle("dark");
-    }
-  </script>
-
-</body>
-</html>
+export default Home;
