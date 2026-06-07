@@ -5,7 +5,6 @@ function Sidebar({ setPage }) {
 
       <ul className="space-y-3">
         <li onClick={() => setPage("home")} className="cursor-pointer">Home</li>
-        <li onClick={() => setPage("post")} className="cursor-pointer">Create Post</li>
         <li onClick={() => setPage("settings")} className="cursor-pointer">Settings</li>
         <li onClick={() => setPage("logout")} className="cursor-pointer text-red-400">Logout</li>
       </ul>

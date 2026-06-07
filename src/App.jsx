@@ -5,9 +5,7 @@ import Footer from "./Footer";
 import Login from "./Login";
 import Logout from "./Logout";
 import Home from "./Home";
-import CreatePost from "./CreatePost";
 import Settings from "./Settings";
-import PostPage from "./PostPage";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -32,16 +30,7 @@ function App() {
         <main className="flex-1 p-6">
 
           {page === "home" && <Home />}
-
-          {page === "post" && (
-            <CreatePost setPost={setPost} setPage={setPage} />
-          )}
-
-          {page === "viewPost" && post && (
-            <PostPage post={post} />
-          )}
-
-          {page === "settings" && <Settings />}
+        {page === "settings" && <Settings />}
 
           {page === "logout" && <Logout setLoggedIn={setLoggedIn} />}
 
