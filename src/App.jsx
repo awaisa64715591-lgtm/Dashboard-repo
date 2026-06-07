@@ -1,44 +1,54 @@
-import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
+
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import Footer from "./Footer";
+
 import Login from "./Login";
 import Logout from "./Logout";
 import Home from "./Home";
-import Settings from "./Settings";
+import Services from "./Services";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [page, setPage] = useState("home");
-  const [darkMode, setDarkMode] = useState(true);
 
-  // 👉 NEW STATE
-  const [post, setPost] = useState(null);
+  const [darkMode, setDarkMode] = useState(() => {
+    return localStorage.getItem("theme") === "dark";
+  });
+
+  useEffect(() => {
+    localStorage.setItem("theme", darkMode ? "dark" : "light");
+  }, [darkMode]);
 
   if (!loggedIn) {
     return <Login setLoggedIn={setLoggedIn} />;
   }
 
   return (
-    <div className={`${darkMode ? "bg-gray-900 text-white" : "bg-gray-100"} min-h-screen`}>
+    <BrowserRouter>
+      <div
+        className={`min-h-screen flex flex-col transition-all duration-300 ${
+          darkMode ? "bg-[#0f172a] text-gray-100" : "bg-gray-100 text-gray-900"
+        }`}
+      >
+        <Header darkMode={darkMode} setDarkMode={setDarkMode} />
 
-      <Header darkMode={darkMode} setDarkMode={setDarkMode} />
+        <div className="flex flex-1">
+          <Sidebar />
 
-      <div className="flex">
-        <Sidebar setPage={setPage} />
+          <main className="flex-1 p-6 transition-all duration-300">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/logout" element={<Logout setLoggedIn={setLoggedIn} />} />
+            </Routes>
+          </main>
+        </div>
 
-        <main className="flex-1 p-6">
-
-          {page === "home" && <Home />}
-        {page === "settings" && <Settings />}
-
-          {page === "logout" && <Logout setLoggedIn={setLoggedIn} />}
-
-        </main>
+        <Footer darkMode={darkMode} />
       </div>
-
-      <Footer />
-    </div>
+    </BrowserRouter>
   );
 }
 
